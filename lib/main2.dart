@@ -16,7 +16,6 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: const MyHomePage(title: 'Halaman Login'),
-      // debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -66,113 +65,68 @@ class _MyHomePageState extends State<MyHomePage> {
       SnackBar(
         content: Text(message),
         backgroundColor: backgroundColor,
-        behavior: SnackBarBehavior.floating,
-        margin: EdgeInsets.all(10),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
     );
   }
 
+// Main
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.orange, title: Text(widget.title)),
       body: Padding(
+        
         padding: const EdgeInsets.all(24.0),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(height: 20),
-              Text(
-                'Silakan Login',
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.orange[800],
-                ),
-              ),
-              SizedBox(height: 20),
-              Image.network(
-                'https://placehold.co/150x150/FF9800/FFFFFF?text=LOGO',
-                height: 150,
-                width: 150,
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    height: 150,
-                    width: 150,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Icon(
-                      Icons.person,
-                      size: 100,
-                      color: Colors.grey[400],
-                    ),
-                  );
-                },
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) return child;
-                  return Container(
-                    height: 150,
-                    width: 150,
-                    child: Center(
-                      child: CircularProgressIndicator(
-                        value: loadingProgress.expectedTotalBytes != null
-                            ? loadingProgress.cumulativeBytesLoaded /
-                                loadingProgress.expectedTotalBytes!
-                            : null,
-                      ),
-                    ),
-                  );
-                },
-              ),
-              SizedBox(height: 32),
-              TextField(
-                controller: _usernameController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+        
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+
+          children: <Widget>[
+            Image.network(
+              'https://placehold.co/150x150/FF9800/FFFFFF?text=LOGO',
+              height: 150,
+              width: 150,
+              errorBuilder: (context, error, stackTrace) {
+                return Container(
+                  height: 150,
+                  width: 150,
+                  color: Colors.grey[200],
+                  child: Icon(
+                    Icons.broken_image,
+                    size: 100,
+                    color: Colors.grey[400],
                   ),
-                  labelText: 'Username',
-                  hintText: 'Masukkan username (nama) Anda',
-                  prefixIcon: Icon(Icons.person_outline),
-                ),
+                );
+              },
+            ),
+            SizedBox(height: 32),
+
+            TextField(
+              controller: _usernameController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Username',
+                hintText: 'Masukkan username (nama) Anda',
               ),
-              SizedBox(height: 16),
-              TextField(
-                controller: _passwordController,
-                obscureText: true,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  labelText: 'Password',
-                  hintText: 'Masukkan password (NIM) Anda',
-                  prefixIcon: Icon(Icons.lock_outline),
-                ),
+            ),
+            SizedBox(height: 16),
+
+            TextField(
+              controller: _passwordController,
+              obscureText: true,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Password',
+                hintText: 'Masukkan password (NIM) Anda',
               ),
-              SizedBox(height: 32),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orange,
-                  foregroundColor: Colors.white,
-                  minimumSize: Size(double.infinity, 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  elevation: 5,
-                ),
-                onPressed: _submitLogin,
-                child: Text(
-                  'Kirim',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ),
-              SizedBox(height: 20),
-            ],
-          ),
+            ),
+            SizedBox(height: 32),
+
+            ElevatedButton(
+              onPressed: _submitLogin,
+              child: Text('Kirim'),
+            ),
+          ],
         ),
       ),
     );
